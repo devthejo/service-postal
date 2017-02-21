@@ -32,7 +32,8 @@ class Session
      * @var unknown
      */
 	 /*PATH TO FOLDER WHERE WSDL FILES ARE: EXAMPLE C:\\Users\Bojan\\Desktop\\WSDLFOLDER\\ */
-    const URL_TEST = "C:\\Users\Admin\\Desktop\\WSDLFOLDER\\"; 
+    //const URL_TEST = "C:\\Users\Admin\\Desktop\\WSDLFOLDER\\"; 
+    const URL_TEST = __DIR__.DIRECTORY_SEPARATOR.'wsdl'.DIRECTORY_SEPARATOR; 
     
     /**
      * API login
