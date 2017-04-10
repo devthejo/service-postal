@@ -3,8 +3,6 @@ namespace SP;
 use SP\Options;
 use SP\Job;
 
-//require_once 'ServicePostalOptions.php';
-//require_once 'ServicePostalJob.php';
 /**
  * Fichier contenant les classes d'accès à l'API Service Postal :
  * - Session
@@ -12,7 +10,6 @@ use SP\Job;
  * @author ServicePostal ( ronanpaul )
  * @version 1.0.0
  * @see https://www.servicepostal.com
- * modif url param override by jo/surikat
  */
 
 
@@ -25,15 +22,14 @@ class Session
      * Production URL for WSDL
      * @var unknown
      */    
-    const URL_PRODUCTION = "";
+    const URL_PRODUCTION = "C:\Users\Jovan\Desktop\WSDL";
     
     /**
      * Test URL for WSDL
      * @var unknown
      */
-	 /*PATH TO FOLDER WHERE WSDL FILES ARE: EXAMPLE C:\\Users\Bojan\\Desktop\\WSDLFOLDER\\ */
-    //const URL_TEST = "C:\\Users\Admin\\Desktop\\WSDLFOLDER\\"; 
-    const URL_TEST = __DIR__.DIRECTORY_SEPARATOR.'wsdl'.DIRECTORY_SEPARATOR; 
+    //const URL_TEST = "C:\Users\Jovan\Desktop\WSDL";
+    const URL_TEST = __DIR__.DIRECTORY_SEPARATOR.'WSDL'.DIRECTORY_SEPARATOR; 
     
     /**
      * API login
@@ -108,7 +104,8 @@ class Session
             ini_set("soap.wsdl_cache_enabled", WSDL_CACHE_NONE);
         }
         else
-            $this->url = $url_production ? : self::URL_PRODUCTION;
+            //$this->url = self::URL_PRODUCTION;
+             $this->url = $url_production ? : self::URL_PRODUCTION;
         
         $this->init();
     }
@@ -127,19 +124,19 @@ class Session
             throw new \Exception("Vous devez définir le mot de passe de l'API !");
             
         // Create the SoapClient Session instance
-        $this->clientSession = new \SoapClient( $this->url."/Session.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientSession = new \SoapClient( $this->url."\Session.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerSession = new \SoapHeader( $this->url."/Session", "Session");
+        $this->headerSession = new \SoapHeader( $this->url, "\Session.wsdl","Session");
         
         // Create the SoapClient Submission instance
-        $this->clientSubmission = new \SoapClient( $this->url."/Submission.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientSubmission = new \SoapClient( $this->url."\Submission.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerSubmission = new \SoapHeader( $this->url."/Submission", "Submission");
+        $this->headerSubmission = new \SoapHeader( $this->url."\Submission.wsdl", "Submission");
         
         // Create the SoapClient Query instance
-        $this->clientQuery = new \SoapClient( $this->url."Query.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientQuery = new \SoapClient( $this->url."\Query.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerQuery = new \SoapHeader( $this->url."/Query", "Query");
+        $this->headerQuery = new \SoapHeader( $this->url."\Query.wsdl", "Query");
         
         $loginParam = array(); //Partner's User name for bindings
         $loginParam["userName"] = $this->api_login;
@@ -462,6 +459,4 @@ class Session
     {
         $this->clientSession->sp_logout();
     }
-} // class Session
-
-?>
+}

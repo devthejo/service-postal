@@ -15,11 +15,11 @@ try
     
     // Création d'un nouvel envoi d'une lettre
     $maLettre = $maSessionSP->nouveauLettreJob()
-        ->setImpression(SP\Options\Couleur::COULEUR, SP\Options\Enveloppe::AUTO, SP\Options\Recto::RECTO, SP\Options\PorteAdresse::INACTIF)
+        ->setImpression(SP\Options\Couleur::COULEUR, SP\Options\Enveloppe::AUTO,\SP\Options\EnveloppeImprimanteMode::PRINTED, SP\Options\Recto::RECTO, SP\Options\PorteAdresse::INACTIF, SP\Options\SenderPrinted::ACTIF,SP\Options\BarCode::ACTIF,SP\Options\StitchedEnveloppePrinted::ACTIF)
         ->setAffranchissement(SP\Options\Affranchissement::LETTRE_RECOMMANDEE)
         ->setReferenceExterne("2016-123456cc")
-        ->setExpediteur("Ronan", "PAUL", "", "9 rue Ambroise Thomas", "", "75009", "Paris")
-        ->setDestinataire("", "", "Service Postal", "4 rue Edouard Branly", "", "78190", "Trappes")
+        ->setExpediteur("Ronan", "PAUL", "", "9 rue Ambroise Thomas", "", "75009", "Paris","France")
+        ->setDestinataire("", "", "Service Postal", "4 rue Edouard Branly", "", "78190", "Trappes", "France")
         ->setDocument(getcwd().$document); 
     
     // Envoi du courrier

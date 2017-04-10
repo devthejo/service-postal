@@ -55,8 +55,12 @@ class Mailing
     public function setImpression(
         $colorParameter = \SP\Options\Couleur::NOIR_ET_BLANC,
         $enveloppeParameter = \SP\Options\Enveloppe::AUTO,
+		$enveloppeModePrintingParameter = \SP\Options\EnveloppeImprimanteMode::WINDOW,
         $rectoParameter = \SP\Options\Recto::RECTO,
-        $headerPage = \SP\Options\PorteAdresse::ACTIF
+		$headerPage = \SP\Options\PorteAdresse::ACTIF, 
+		$senderPrintedParameter=\SP\Options\SenderPrinted::ACTIF,
+		$barCodeParameter =\SP\Options\BarCode::ACTIF, // always active if window enveloppe selected
+		$stitchedEnveloppePrintedParameter =\SP\Options\StitchedEnveloppePrinted::INACTIF // only makes sense when printed enveloppe is selected
         )
     {
         //Printing Parameters
@@ -65,7 +69,11 @@ class Mailing
             $this->printingParameters["spColorParameter"] = $colorParameter;
             $this->printingParameters["spEnveloppeParameter"] = $enveloppeParameter;
             $this->printingParameters["spRectoParameter"] = $rectoParameter;
-            $this->printingParameters["spHeaderPage"] = $headerPage;
+			$this->printingParameters["spHeaderPageWindowEnvelope"] = $headerPage;
+			$this->printingParameters["spEnvelopePrintingMode"] = $enveloppeModePrintingParameter;
+			$this->printingParameters["spSenderPrintedOnEnvelope"] = $senderPrintedParameter;
+			$this->printingParameters["spAddressStitchedOnDocumentPrintedEnvelope"] = $stitchedEnveloppePrintedParameter;
+			$this->printingParameters["spAddBarCodeToDocumentPrintedEnvelope"] = $barCodeParameter;
 
             return $this;
     }
@@ -179,7 +187,7 @@ class Mailing
             $estimatePriceParam["spNbOfPages"] = $NbOfPages;
             $estimatePriceParam["spLetterOptions"] = $this->printingParameters;
 
-            $result = $this->session->clientSubmission->sp_estimate_price($estimatePriceParam);
+            $result = $this->session->clientSubmission->sp_estimate_job_price($estimatePriceParam);
 
             return $result->sp_estimate_priceResult;
         }
@@ -314,4 +322,4 @@ class Mailing
     }
 
 
-} // class Mailing
+}

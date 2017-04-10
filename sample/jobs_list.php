@@ -15,7 +15,7 @@ catch (\Exception $e)
 
 try // Récupération des envois
 {
-    $result = $maSessionSP->queryJobs("2016-02-02T11:50:15", "2016-02-02T11:54:15");
+    $result = $maSessionSP->queryJobs("2017-04-01T11:50:15", "2017-04-04T11:54:15");
     if(is_array($result) && count($result)>0)
     {
         foreach ($result as $letter)

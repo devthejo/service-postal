@@ -2,14 +2,6 @@
 namespace SP\Options;
 
 /**
- * Fichier contenant les classes d'option pour l'accès à l'API Service Postal
- * @author ServicePostal ( ronanpaul )
- * @version 1.0.0
- * @see https://www.servicepostal.com
- */
-
-
-/**
  * Classe contenant les constantes des types de document stockés par service postal
  * - document
  * - preuve de dépôt

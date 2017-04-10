@@ -1,12 +1,5 @@
 <?php
 namespace SP\Job;
-/**
- * File for Job classes:
- * - Letter
- * - Mailing
- * @author Service Postal (ronanpaul)
- *
- */
 
 /**
  * classe SP\Job\Lettre
@@ -86,8 +79,12 @@ class Lettre
     public function setImpression(
         $colorParameter = \SP\Options\Couleur::NOIR_ET_BLANC,
         $enveloppeParameter = \SP\Options\Enveloppe::AUTO,
+		$enveloppeModePrintingParameter = \SP\Options\EnveloppeImprimanteMode::PRINTED,
         $rectoParameter = \SP\Options\Recto::RECTO,
-        $headerPage = \SP\Options\PorteAdresse::ACTIF
+        $headerPage = \SP\Options\PorteAdresse::INACTIF, // only works when Window enveloppe is selected
+		$senderPrintedParameter=\SP\Options\SenderPrinted::ACTIF,
+		$barCodeParameter =\SP\Options\BarCode::ACTIF,
+		$stitchedEnveloppePrintedParameter =\SP\Options\StitchedEnveloppePrinted::ACTIF
         )
     {
         //Printing Parameters
@@ -96,7 +93,12 @@ class Lettre
             $this->printingParameters["spColorParameter"] = $colorParameter;
             $this->printingParameters["spEnveloppeParameter"] = $enveloppeParameter;
             $this->printingParameters["spRectoParameter"] = $rectoParameter;
-            $this->printingParameters["spHeaderPage"] = $headerPage;
+			$this->printingParameters["spHeaderPageWindowEnvelope"] = $headerPage;
+			$this->printingParameters["spEnvelopePrintingMode"] = $enveloppeModePrintingParameter;
+			$this->printingParameters["spSenderPrintedOnEnvelope"] = $senderPrintedParameter;
+			$this->printingParameters["spAddressStitchedOnDocumentPrintedEnvelope"] = $stitchedEnveloppePrintedParameter;
+			$this->printingParameters["spAddBarCodeToDocumentPrintedEnvelope"] = $barCodeParameter;
+         /*   $this->printingParameters["spHeaderPage"] = $headerPage;*/
 
             return $this;
     }
@@ -194,7 +196,7 @@ class Lettre
         $spSender["spSecondLine"] = $adresse2;
         $spSender["spPostalCode"]  = $codePostal;
         $spSender["spCityName"] = $ville;
-        $spSender["spCountryName"] = $pays;
+        $spSender["spCountry"] = $pays;
 
         $this->expediteur = $spSender;
         $this->printingParameters["spSender"] = $this->expediteur;
@@ -262,7 +264,7 @@ class Lettre
         $spRecipient["spSecondLine"] = $adresse2;
         $spRecipient["spPostalCode"]  = $codePostal;
         $spRecipient["spCityName"] = $ville;
-        $spRecipient["spCountryName"] = $pays;
+        $spRecipient["spCountry"] = $pays;
 
         //TODO : handle multiple documents
         /*
@@ -320,9 +322,9 @@ class Lettre
             $estimatePriceParam = array();
             $estimatePriceParam["spNbOfPages"] = $NbOfPages;
             $estimatePriceParam["spLetterOptions"] = $this->printingParameters;
-
             $result = $this->session->clientSubmission->sp_estimate_price($estimatePriceParam);
-
+			echo print_r($this->printingParameters);
+			
             return $result->sp_estimate_priceResult;
         }
         catch (\Exception $e)
@@ -463,4 +465,4 @@ class Lettre
     }
 
 
-} // class Lettre
+}

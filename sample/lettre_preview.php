@@ -29,9 +29,13 @@ try
     $maLettre = $maSessionSP->nouveauLettreJob()
         ->setImpression(    
             SP\Options\Couleur::COULEUR,            // Couleur du courrier 
-            SP\Options\Enveloppe::AUTO,               // Taille de l'enveloppe 
+            SP\Options\Enveloppe::AUTO, 			// Taille de l'enveloppe 
+			SP\Options\EnveloppeImprimanteMode::WINDOW,
             SP\Options\Recto::RECTO,          // Impresstion recto ou recto/verso 
-            SP\Options\PorteAdresse::ACTIF          // Porte-adresse (optionnel) 
+            SP\Options\PorteAdresse::ACTIF , // Porte-adresse (optionnel) 
+			SP\Options\SenderPrinted::ACTIF,
+			SP\Options\BarCode::ACTIF,
+			SP\Options\StitchedEnveloppePrinted::INACTIF			
             )
         ->setAffranchissement(
             SP\Options\Affranchissement::LETTRE_RECOMMANDEE   // Type d'affranchissement 
@@ -62,7 +66,7 @@ try
         ->setDocument(getcwd().$document);
         
     // Obtenir le coût théorique d'un courrier de 5 pages avec ces options d'impression / affranchissement
-    $estimatePriceResult = $maLettre->estimerPrix(5);
+    $estimatePriceResult = $maLettre->estimerPrix(2);
     echo "<h2>Estimation</h2>";
     echo "Votre courrier de ", $estimatePriceResult->spWeight, " g sera produit pour un coût de ",  ($estimatePriceResult->spServicePrice + $estimatePriceResult->spStampPrice), " €.<br />";
     echo "<table border='1'><tr><th>code</th><th>prix</th><th>qté</th></tr>";

@@ -24,10 +24,14 @@ try
     // Création d'un nouvel envoi (job) 
     $monMailing = $maSessionSP->nouveauMailingJob()
         ->setImpression(    
-            SP\Options\Couleur::COULEUR,      // Couleur du courrier 
-            SP\Options\Enveloppe::AUTO,       // Taille de l'enveloppe 
+            SP\Options\Couleur::COULEUR,            // Couleur du courrier 
+            SP\Options\Enveloppe::AUTO, 			// Taille de l'enveloppe 
+			SP\Options\EnveloppeImprimanteMode::WINDOW,
             SP\Options\Recto::RECTO,          // Impresstion recto ou recto/verso 
-            SP\Options\PorteAdresse::INACTIF  // Porte-adresse (optionnel) 
+            SP\Options\PorteAdresse::ACTIF , // Porte-adresse (optionnel) 
+			SP\Options\SenderPrinted::ACTIF,
+			SP\Options\BarCode::ACTIF,
+			SP\Options\StitchedEnveloppePrinted::INACTIF
             )
         ->setAffranchissement(
             SP\Options\Affranchissement::LETTRE_VERTE // Type d'affranchissement 

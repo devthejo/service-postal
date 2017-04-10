@@ -1,6 +1,5 @@
 <?php
 namespace SP\Options;
-
 /**
  * Classe contenant les constantes des réponses d'une méthode 
  * - succès

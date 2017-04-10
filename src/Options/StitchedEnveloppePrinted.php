@@ -1,11 +1,10 @@
 <?php
 namespace SP\Options;
-
 /**
  * Classe contenant les constantes des actif/inactif du porte adresse de service postal
  * @author servicepostal
  */
-class PorteAdresse
+class StitchedEnveloppePrinted
 {
             //SP_YES = "SP_YES",
             //SP_NO = "SP_NO",

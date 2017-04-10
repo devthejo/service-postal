@@ -1,7 +1,6 @@
 <?php
 namespace SP\Options;
-
-
+ 
 /**
  * Classe contenant les constantes des différents statuts d'un job
  * - brouillon

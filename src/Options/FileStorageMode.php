@@ -1,6 +1,5 @@
 <?php
 namespace SP\Options;
-
 /**
  * Classe contenant les constantes des types de transfert des pièces jointes
  * - dans la trame
