@@ -124,19 +124,19 @@ class Session
             throw new \Exception("Vous devez définir le mot de passe de l'API !");
             
         // Create the SoapClient Session instance
-        $this->clientSession = new \SoapClient( $this->url."\Session.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientSession = new \SoapClient( $this->url.DIRECTORY_SEPARATOR."Session.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerSession = new \SoapHeader( $this->url, "\Session.wsdl","Session");
+        $this->headerSession = new \SoapHeader( $this->url, .DIRECTORY_SEPARATOR."Session.wsdl","Session");
         
         // Create the SoapClient Submission instance
-        $this->clientSubmission = new \SoapClient( $this->url."\Submission.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientSubmission = new \SoapClient( $this->url.DIRECTORY_SEPARATOR."Submission.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerSubmission = new \SoapHeader( $this->url."\Submission.wsdl", "Submission");
+        $this->headerSubmission = new \SoapHeader( $this->url.DIRECTORY_SEPARATOR."Submission.wsdl", "Submission");
         
         // Create the SoapClient Query instance
-        $this->clientQuery = new \SoapClient( $this->url."\Query.wsdl", array("trace" => 1, "Exception" => 0));
+        $this->clientQuery = new \SoapClient( $this->url.DIRECTORY_SEPARATOR."Query.wsdl", array("trace" => 1, "Exception" => 0));
         // Create the header
-        $this->headerQuery = new \SoapHeader( $this->url."\Query.wsdl", "Query");
+        $this->headerQuery = new \SoapHeader( $this->url.DIRECTORY_SEPARATOR."Query.wsdl", "Query");
         
         $loginParam = array(); //Partner's User name for bindings
         $loginParam["userName"] = $this->api_login;
