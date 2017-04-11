@@ -1,6 +1,6 @@
 <?php
-require_once 'SP_config.php';
-require_once 'servicepostal/ServicePostal.php';
+//require_once '../vendor/autoload.php'; //via composer
+require_once 'autoloader.php'; //via stand-alone autoloader
 
 echo "<h1>Envoi de lettre (direct)</h1>";
  
